@@ -1,0 +1,108 @@
+<form nz-form [formGroup]="tourForm" (ngSubmit)="submitForm()">
+  <div class="form-1">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="title" nzRequired>
+          <span>
+            Title
+            <i nz-icon nz-tooltip nzTooltipTitle="What do you want other to call you" nzType="question-circle"
+               nzTheme="outline"></i>
+          </span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter tour title!">
+        <input nz-input id="title" formControlName="title"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="description" nzRequired>
+          <span>
+            description
+            <i nz-icon nz-tooltip nzTooltipTitle="What do you want other to call you" nzType="question-circle"
+               nzTheme="outline"></i>
+          </span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+        <input nz-input id="description" formControlName="description"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="image" nzRequired>
+          <span>
+            image
+            <i nz-icon nz-tooltip nzTooltipTitle="What do you want other to call you" nzType="question-circle"
+               nzTheme="outline"></i>
+          </span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your image!">
+        <input nz-input id="image" formControlName="image"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="day" nzRequired>
+          <span>
+            day
+            <i nz-icon nz-tooltip nzTooltipTitle="What do you want other to call you" nzType="question-circle"
+               nzTheme="outline"></i>
+          </span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your day!">
+        <input nz-input id="day" formControlName="day"/>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+  <div class="form-2">
+    <nz-table nzTemplateMode>
+      <thead>
+      <tr>
+        <th>Action</th>
+        <th>Service Name</th>
+        <th>Description</th>
+        <th>Amount</th>
+      </tr>
+      </thead>
+      <tbody formArrayName="tourPackages"
+             *ngFor="let address of packageControls; let i = index;">
+      <tr [formGroupName]="i">
+        <td (click)="removePackage(i)" class="custom-icon">
+          <i nz-icon nzType="delete" nzTheme="outline"></i>
+        </td>
+        <td>
+          <label>
+            <input nz-input formControlName="name" placeholder="Service Name" nzSize="default"/>
+          </label>
+
+        </td>
+        <td>
+          <label>
+            <textarea nz-input formControlName="description" placeholder="description" nzAutosize></textarea>
+          </label>
+        </td>
+        <td>
+          <label>
+            <input nz-input formControlName="amount" placeholder="Amount" nzSize="default"/>
+          </label>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td (click)="addPackage()" class="custom-icon">
+          <i nz-icon nzType="file-add" nzTheme="outline"></i>
+        </td>
+      </tr>
+      </tfoot>
+    </nz-table>
+  </div>
+  <br>
+  <nz-divider></nz-divider>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="20">
+      <button nz-button nzType="primary">Generate Tour</button>
+
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<h3>{{this.tourForm.value | json  }}</h3>
